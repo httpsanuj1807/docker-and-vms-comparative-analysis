@@ -34,6 +34,16 @@ docker-and-vms-comparative-analysis/
 │   ├── Dockerfile            # Container image definition
 │   ├── docker-compose.yml    # Local development setup
 │   └── tests/                # Application tests
+├── benchmarks/                # Benchmark Automation
+│   ├── scripts/              # Automation scripts
+│   │   ├── run-full-benchmark.sh
+│   │   ├── measure-startup-time.sh
+│   │   ├── collect-metrics.sh
+│   │   └── parse-jmeter-results.sh
+│   ├── jmeter/               # JMeter test plans
+│   │   ├── static-test.jmx
+│   │   └── compute-test.jmx
+│   └── results/              # Test results (gitignored)
 ├── terraform/                 # AWS Infrastructure as Code
 │   ├── provider.tf           # AWS provider configuration
 │   ├── variables.tf          # Input variables

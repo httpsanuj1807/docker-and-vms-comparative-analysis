@@ -36,3 +36,7 @@ package-lock.json
 # JMeter
 *.jtl
 *_report/
+
+# Benchmark results (keep .gitkeep)
+benchmarks/results/*
+!benchmarks/results/.gitkeep
