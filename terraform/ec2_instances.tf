@@ -119,9 +119,6 @@ resource "aws_instance" "docker_host" {
 
   monitoring = var.enable_enhanced_monitoring
 
-  # Enable ENA for enhanced networking (high bandwidth)
-  ena_support = true
-
   metadata_options {
     http_endpoint               = "enabled"
     http_tokens                 = "required"
@@ -184,8 +181,6 @@ resource "aws_instance" "vm_host" {
 
   monitoring = var.enable_enhanced_monitoring
 
-  ena_support = true
-
   metadata_options {
     http_endpoint               = "enabled"
     http_tokens                 = "required"
@@ -247,8 +242,6 @@ resource "aws_instance" "load_generator" {
   user_data = base64encode(file("${path.module}/scripts/load-generator-setup.sh"))
 
   monitoring = var.enable_enhanced_monitoring
-
-  ena_support = true
 
   metadata_options {
     http_endpoint               = "enabled"
