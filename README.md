@@ -28,6 +28,12 @@ This research presents a systematic comparative analysis of resource utilization
 
 ```
 docker-and-vms-comparative-analysis/
+├── app/                       # Web Application
+│   ├── server.js             # Express.js application
+│   ├── package.json          # Node.js dependencies
+│   ├── Dockerfile            # Container image definition
+│   ├── docker-compose.yml    # Local development setup
+│   └── tests/                # Application tests
 ├── terraform/                 # AWS Infrastructure as Code
 │   ├── provider.tf           # AWS provider configuration
 │   ├── variables.tf          # Input variables
