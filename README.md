@@ -44,6 +44,15 @@ docker-and-vms-comparative-analysis/
 │   │   ├── static-test.jmx
 │   │   └── compute-test.jmx
 │   └── results/              # Test results (gitignored)
+├── analysis/                  # Data Analysis Suite
+│   ├── run_analysis.py       # Main analysis runner
+│   ├── parse_results.py      # JMeter/metrics parsers
+│   ├── generate_charts.py    # Chart generation
+│   ├── generate_tables.py    # LaTeX/Markdown tables
+│   ├── generate_sample_data.py # Sample data generator
+│   ├── utils.py              # Utility functions
+│   ├── requirements.txt      # Python dependencies
+│   └── README.md             # Analysis documentation
 ├── terraform/                 # AWS Infrastructure as Code
 │   ├── provider.tf           # AWS provider configuration
 │   ├── variables.tf          # Input variables
@@ -67,6 +76,8 @@ docker-and-vms-comparative-analysis/
 - AWS Account with appropriate permissions
 - AWS CLI configured
 - Terraform >= 1.0.0
+- Python >= 3.9 (for data analysis)
+- Node.js >= 18 (for local app development)
 
 ### Deploy Infrastructure
 
@@ -100,6 +111,13 @@ terraform apply
    ssh -i docker-vm-research-key.pem ubuntu@<load_generator_ip>
    /opt/benchmarks/run-benchmarks.sh <docker_host_private_ip> 3000 docker
    /opt/benchmarks/run-benchmarks.sh <vm_ip> 3000 vm
+   ```
+
+4. **Analyze Results**
+   ```bash
+   cd analysis
+   pip install -r requirements.txt
+   python run_analysis.py ../benchmarks/results
    ```
 
 ## Testbed Configuration
