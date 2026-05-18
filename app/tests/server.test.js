@@ -145,5 +145,38 @@ describe('404 Handler', () => {
   });
 });
 
+describe('Compute Endpoint - Input Validation', () => {
+  it('should default to n=35 when no query param provided', async () => {
+    const res = await makeRequest('/api/compute');
+    assert.strictEqual(res.body.input, 35);
+    assert.strictEqual(res.body.result, 9227465);
+  });
+
+  it('should cap n at 45 to prevent runaway CPU usage', async () => {
+    const res = await makeRequest('/api/compute?n=100');
+    assert.strictEqual(res.body.input, 45);
+  });
+
+  it('should handle non-numeric n gracefully (defaults to 35)', async () => {
+    const res = await makeRequest('/api/compute?n=abc');
+    assert.strictEqual(res.status, 200);
+    assert.strictEqual(res.body.success, true);
+    assert.strictEqual(res.body.input, 35);
+  });
+});
+
+describe('Security Headers', () => {
+  it('should not expose server version information', async () => {
+    const res = await makeRequest('/health');
+    assert.ok(!res.headers['x-powered-by'] || res.headers['x-powered-by'] !== 'Express',
+      'x-powered-by header should not expose framework version');
+  });
+
+  it('should return JSON content-type on API endpoints', async () => {
+    const res = await makeRequest('/api/static');
+    assert.ok(res.headers['content-type'].includes('application/json'));
+  });
+});
+
 console.log('Run tests with: node --test tests/server.test.js');
 console.log('Note: Server must be running on port 3000');
