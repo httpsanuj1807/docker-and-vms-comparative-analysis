@@ -28,12 +28,15 @@ This research presents a systematic comparative analysis of resource utilization
 
 ```
 docker-and-vms-comparative-analysis/
+├── presentations/             # Research Presentation
+│   └── Docker_vs_VM_Presentation.pptx  # Final slide deck (16 slides)
 ├── app/                       # Web Application
 │   ├── server.js             # Express.js application
 │   ├── package.json          # Node.js dependencies
 │   ├── Dockerfile            # Container image definition
 │   ├── docker-compose.yml    # Local development setup
 │   └── tests/                # Application tests
+│       └── server.test.js    # Unit tests for all endpoints
 ├── benchmarks/                # Benchmark Automation
 │   ├── scripts/              # Automation scripts
 │   │   ├── run-full-benchmark.sh
@@ -41,8 +44,8 @@ docker-and-vms-comparative-analysis/
 │   │   ├── collect-metrics.sh
 │   │   └── parse-jmeter-results.sh
 │   ├── jmeter/               # JMeter test plans
-│   │   ├── static-test.jmx
-│   │   └── compute-test.jmx
+│   │   ├── static-test.jmx   # I/O-bound workload
+│   │   └── compute-test.jmx  # CPU-bound workload
 │   └── results/              # Test results (gitignored)
 ├── analysis/                  # Data Analysis Suite
 │   ├── run_analysis.py       # Main analysis runner
@@ -149,15 +152,21 @@ As per research paper methodology:
 1. **Static/I/O-bound**: 50KB JSON payload endpoint
 2. **Compute/CPU-bound**: Fibonacci(35) calculation
 
+## Presentation
+
+The final research presentation is in [`presentations/Docker_vs_VM_Presentation.pptx`](presentations/Docker_vs_VM_Presentation.pptx) (16 slides).
+
+Covers: Introduction → Architecture → Methodology → CPU & Memory → Disk/Network/Startup → Security → Conclusion.
+
 ## Key Findings
 
-| Metric | Docker Advantage |
-|--------|-----------------|
-| CPU Overhead | 12-18% reduction |
-| Memory Footprint | ~40% reduction |
-| Disk I/O Latency | 38% improvement |
-| Network Throughput | 23% improvement |
-| Startup Time | 123x faster |
+| Metric | Docker | VM | Docker Advantage |
+|--------|--------|----|-----------------|
+| CPU Overhead | ~35% | ~42% | 12-18% reduction |
+| Memory Footprint | ~512 MB | ~850 MB | ~40% reduction |
+| Disk I/O Latency | ~0.42 ms | ~0.68 ms | 22-38% improvement |
+| Network Throughput | ~4850 req/s | ~4250 req/s | ~23% improvement |
+| Startup Time | ~245 ms | ~30,150 ms | 123x faster |
 
 ## License
 
